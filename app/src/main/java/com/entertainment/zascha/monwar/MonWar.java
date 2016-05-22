@@ -5,11 +5,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MonWar extends AppCompatActivity {
+
+    private static final String LOG_TAG = MonWar.class.getSimpleName();
+
+    private DatabaseHandler dataField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +22,11 @@ public class MonWar extends AppCompatActivity {
         setContentView(R.layout.activity_mon_war);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Monster testMonster = new Monster(1, "pikachu", new int[] {1,2,3} );
+        Log.d(LOG_TAG,"" + testMonster.toString());
+
+        dataField = new DatabaseHandler(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
