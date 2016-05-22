@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.List;
 
 public class MonWar extends AppCompatActivity {
 
@@ -30,6 +34,13 @@ public class MonWar extends AppCompatActivity {
 
         Log.d(LOG_TAG,"Öffne DB");
         dataField.open();
+
+        Monster monster = dataField.createDatabaseHandler("Pichaku", new int[]{1,2,2});
+        Log.d(LOG_TAG, "New Monster:");
+        Log.d(LOG_TAG, "ID:" + monster.getId() + "Inhalt:" + monster.toString());
+
+        Log.d(LOG_TAG, "Complete List of Monsters");
+        showAllListEntries();
 
         Log.d(LOG_TAG,"Schließe DB");
         dataField.close();
@@ -64,5 +75,15 @@ public class MonWar extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showAllListEntries(){
+        List<Monster> monsterList = dataField.getAllMonsters();
+
+        ArrayAdapter<Monster> monsterArrayAdapter = new ArrayAdapter<>( this,
+                android.R.layout.simple_list_item_multiple_choice,monsterList);
+
+        ListView monsterListView = (ListView) findViewById(R.id.listview_monster);
+        monsterListView.setAdapter(monsterArrayAdapter);
     }
 }
