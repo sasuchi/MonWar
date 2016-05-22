@@ -28,6 +28,12 @@ public class MonWar extends AppCompatActivity {
 
         dataField = new DatabaseHandler(this);
 
+        Log.d(LOG_TAG,"Öffne DB");
+        dataField.open();
+
+        Log.d(LOG_TAG,"Schließe DB");
+        dataField.close();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
